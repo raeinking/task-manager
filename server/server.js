@@ -1,12 +1,27 @@
-import express from "express";
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
-const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello from Express!");
-});
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Express server running at http://localhost:${PORT}/`);
-});
+// Routes
+const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/tasks');
+
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+
+// Connect to MongoDB and Start Server
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Server running on port ${process.env.PORT}`);
+    });
+  })
+  .catch(err => console.error(err));
