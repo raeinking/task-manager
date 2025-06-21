@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';
+import axios from '../api/axios';
+import '../style/style.css'; // You'll create this CSS file
+
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -19,11 +21,36 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-      <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-      <button type="submit">Login</button>
-    </form>
+    <div className="background">
+      <div className="shape"></div>
+      <div className="shape1"></div>
+
+      <form onSubmit={handleSubmit}>
+        <h3>Login Here</h3>
+
+        <label htmlFor="username">Email</label>
+        <input
+          type="text"
+          placeholder="Enter your email"
+          id="username"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          id="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit">Log In</button>
+        <div className='bott'>if you don't have account <a href='/register'>Register</a></div>
+      </form>
+    </div>
   );
 }
