@@ -25,6 +25,19 @@
     rgba(80, 139, 252, 1)
   );
 }
+.table-wrapper {
+  width: 100%;
+}
+
+.tbody-scroll {
+  max-height: 300px; /* or any value you prefer */
+  overflow-y: auto;
+}
+
+.tbody-scroll table {
+  width: 100%;
+  table-layout: fixed;
+}
 
 .mask-custom {
   background: rgba(24, 24, 16, 0.2);
